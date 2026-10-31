@@ -14,7 +14,7 @@
 <link rel="icon" href="img/icone.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -60,7 +60,7 @@
     --dur-ui: .22s;
 
     --fonte: "Instrument Sans", "Instrument Sans reserva", Arial, sans-serif;
-    --fonte-titulo: "Bricolage Grotesque", "Bricolage reserva", "Arial Black", Arial, sans-serif;
+    --fonte-titulo: "Baloo 2", "Bricolage reserva", "Arial Black", Arial, sans-serif;
     --largura: 1240px;
     --margem: clamp(16px, 4vw, 40px);
   }
@@ -521,6 +521,68 @@
   @media (max-width: 600px) { .flutuante { width: 56px; height: 56px; } .flutuante svg { width: 27px; height: 27px; } }
   @media (prefers-reduced-motion: reduce) { .flutuante { transition: none; transform: none; } }
 
+  /* ============================================================
+     JEITO DA CASA: o que faz esta loja nao parecer as outras.
+     Letra redonda de loja de brinquedo; banner com a borda recortada
+     como papel de presente; atalho "Presente por idade" em bolhas
+     coloridas; cada produto num fundo de cor.
+     ============================================================ */
+  h1, h2, h3 { font-weight: 800; letter-spacing: -.01em; line-height: 1; }
+  .marca strong, .rodape-nome { font-weight: 800; }
+  .destaque h2 { font-size: clamp(2.2rem, 1.3rem + 3vw, 3.8rem); line-height: .95; }
+
+  /* banner: cantos bem redondos em cima e borda de baixo recortada */
+  .destaques-trilho {
+    border-radius: 32px 32px 0 0;
+    -webkit-mask: linear-gradient(#000, #000) top / 100% calc(100% - 13px) no-repeat, radial-gradient(circle at 50% 0, #000 13px, transparent 13.5px) bottom / 30px 14px repeat-x;
+    mask: linear-gradient(#000, #000) top / 100% calc(100% - 13px) no-repeat, radial-gradient(circle at 50% 0, #000 13px, transparent 13.5px) bottom / 30px 14px repeat-x;
+  }
+  .destaque-texto { padding-bottom: clamp(3.8rem, 6vw, 4.2rem); }
+  .destaques .pontos { bottom: 1.2rem; }
+  .ponto[aria-current="true"]::before { background: var(--vermelho); }
+  .no-escuro .ponto[aria-current="true"]::before { background: #fff; }
+
+  /* presente por idade */
+  .por-idade { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 1rem 2rem; padding: 1.6rem 0 .6rem; }
+  .por-idade h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); }
+  .idade-bolhas { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .8rem; }
+  .idade-bolha { --c: #FFE27A; display: grid; justify-items: center; align-content: center; gap: 0; min-height: 84px; padding: .5rem; border: 0; border-radius: 26px; background: var(--c); color: var(--tinta); cursor: pointer; transition: transform .2s var(--ease-out), border-radius .2s var(--ease-out); }
+  .idade-bolha:nth-child(2) { --c: #FFD3D6; }
+  .idade-bolha:nth-child(3) { --c: #CDEFD8; }
+  .idade-bolha:nth-child(4) { --c: #D4DFFB; }
+  .idade-bolha:nth-child(5) { --c: #E6DBFA; }
+  .idade-bolha b { font: 800 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1 var(--fonte-titulo); white-space: nowrap; }
+  .idade-bolha span { font-size: .9rem; font-weight: 600; }
+  @media (hover: hover) and (pointer: fine) { .idade-bolha:hover { transform: translateY(-3px) rotate(-2deg); } }
+  .idade-bolha:active { transform: scale(.96); }
+  @media (prefers-reduced-motion: reduce) { .idade-bolha { transition: none; } .idade-bolha:hover, .idade-bolha:active { transform: none; } }
+  @media (max-width: 860px) { .por-idade { grid-template-columns: minmax(0, 1fr); gap: .8rem; } }
+  @media (max-width: 520px) {
+    .idade-bolhas { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--margem) * -1); padding-inline: var(--margem); }
+    .idade-bolhas::-webkit-scrollbar { display: none; }
+    .idade-bolha { flex: 0 0 92px; min-height: 76px; scroll-snap-align: start; }
+  }
+
+  /* categorias: bolhas de cor */
+  .categoria span:first-child { background: #FFF3C4; }
+  .categoria:nth-child(4n+2) span:first-child { background: #FFE1E3; }
+  .categoria:nth-child(4n+3) span:first-child { background: #DDF3E4; }
+  .categoria:nth-child(4n) span:first-child { background: #E3EAFC; }
+  .categoria img { mix-blend-mode: multiply; }
+  .categoria[aria-pressed="true"] span:first-child { box-shadow: 0 0 0 4px var(--vermelho); }
+
+  /* produto: cada um num fundo de cor, selo de etiqueta torta */
+  .produto { border-radius: 22px; box-shadow: none; background: var(--branco); }
+  .produto-foto { margin: 8px 8px 0; border-radius: 16px; border-bottom: 0; background: #FFF3C4; overflow: hidden; }
+  .fileira > li:nth-child(4n+2) .produto-foto { background: #FFE1E3; }
+  .fileira > li:nth-child(4n+3) .produto-foto { background: #DDF3E4; }
+  .fileira > li:nth-child(4n) .produto-foto { background: #E3EAFC; }
+  .produto-foto img { mix-blend-mode: multiply; }
+  .selo { rotate: -4deg; border-radius: 8px; }
+  .produto-preco { font-family: var(--fonte-titulo); font-size: 1.4rem; font-weight: 800; color: var(--azul); line-height: 1.1; }
+  .produto-preco small { font-family: var(--fonte); }
+  .produto .btn { border-radius: 999px; }
+
 </style>
 <script>document.documentElement.classList.add("com-js");</script>
 </head>
@@ -591,6 +653,10 @@
       <button class="seta seta-prox" type="button" id="destaque-prox" aria-label="Próximo destaque"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       <div class="pontos" id="pontos"></div>
     </div>
+    <nav class="por-idade" aria-labelledby="titulo-idade">
+      <h2 id="titulo-idade">Presente por idade</h2>
+      <div class="idade-bolhas" id="idade-bolhas"></div>
+    </nav>
     <ul class="fatos">
       <li class="fato"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 13 6 6h20l2 7M4 13h24M4 13v13h24V13M12 26v-7h8v7"/></svg><span><strong>Retire na loja</strong>Av. Pedro Duarte Amoroso, 1050</span></li>
       <li class="fato"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 9h16v13H3zM19 13h5l4 5v4h-9"/><circle cx="8" cy="24" r="2.5"/><circle cx="23" cy="24" r="2.5"/></svg><span><strong>Entrega em Cravinhos</strong>Taxa informada pelo WhatsApp</span></li>
@@ -1309,6 +1375,14 @@ function desenharLista() {
     <p class="lista-nota">Sugestões pela idade indicada pelo fabricante. Na loja tem mais opções, e a nossa equipe ajuda a escolher.</p>`;
 }
 const textoAjuda = () => `Olá! Procuro um presente para alguém de ${IDADES[pr.idade][0]}${pr.valor < VALORES.length ? `, ${VALORES[pr.valor][0].replace("Até", "até")}` : ""}. Poderiam me ajudar a escolher?`;
+/* atalho do topo: marca a idade no "Presente certo" e desce ate ele */
+$("#idade-bolhas").innerHTML = IDADES.map(([n, de], i) => `<button class="idade-bolha" type="button" data-idade="${i}"><b>${de >= 13 ? `${de}+` : n.replace(" anos", "")}</b><span>anos</span></button>`).join("");
+$("#idade-bolhas").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-idade]"); if (!b) return;
+  const r = $(`#idades input[value="${b.dataset.idade}"]`);
+  r.checked = true; r.dispatchEvent(new Event("change", { bubbles: true }));
+  $("#presente").scrollIntoView({ behavior: reduzir.matches ? "auto" : "smooth" });
+});
 $("#presente").addEventListener("change", (e) => {
   const { name, value } = e.target;
   if (name !== "idade" && name !== "valor") return;
