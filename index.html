@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#1E44B8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111830" media="(prefers-color-scheme: dark)">
-<!-- o site tem modo escuro proprio: a extensao Dark Reader nao mexe -->
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#1E44B8">
+<!-- o site e sempre claro: a extensao Dark Reader nao mexe -->
 <meta name="darkreader-lock">
 <title>Pena Presentes | Brinquedos e papelaria em Cravinhos</title>
 <meta name="description" content="Brinquedos, jogos, massinha, patinetes e papelaria. Ache o presente certo pela idade, compre pelo site e retire na loja ou receba em casa. Av. Pedro Duarte Amoroso, Cravinhos (SP).">
@@ -37,8 +36,8 @@
      a fita de presente que amarra o cartao das sugestoes.
      ============================================================ */
   :root {
-    /* claro e escuro: as cores do escuro ficam no fim do estilo, e o navegador nao escurece o site sozinho */
-    color-scheme: light dark;
+    /* "only light": o site e sempre claro e o navegador nao escurece sozinho */
+    color-scheme: only light;
     --branco:   #FFFFFF;
     --ceu:      #EEF3FD;   /* fundo azul bem claro das faixas */
     --ceu-2:    #DCE6FA;
@@ -522,56 +521,6 @@
   @media (max-width: 600px) { .flutuante { width: 56px; height: 56px; } .flutuante svg { width: 27px; height: 27px; } }
   @media (prefers-reduced-motion: reduce) { .flutuante { transition: none; transform: none; } }
 
-  /* ---------- modo escuro: azul-noite, o azul do letreiro clareado para ler e o vermelho da fita igual ---------- */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --branco:   #111830;   /* fundo da pagina e dos cartoes */
-      --ceu:      #0B1124;   /* faixas: mais fundas que os cartoes */
-      --ceu-2:    #1B2547;
-      --azul:     #9DB4FF;   /* botao azul claro com texto escuro; link 8:1 no fundo */
-      --azul-2:   #BFD0FF;
-      --azul-claro: #1E2B57;
-      --marinho:  #080D1F;
-      --marinho-2:#1A2C63;
-      --tinta:    #E8ECF8;
-      --tinta-2:  #AEB6CF;
-      --linha:    #26304F;
-      --linha-forte: #737D9C;
-    }
-    html { background: var(--branco); scrollbar-color: #3A4670 var(--branco); }
-    /* texto escuro em cima do azul claro */
-    .btn, .sacola-botao { color: #0B1430; }
-    .btn-branco, .btn-linha { color: var(--tinta); }
-    .btn-zap { color: #fff; }
-    /* selecionado: claro sobre o escuro */
-    .btn.adicionado, .opcao input:checked + span, .pilula:has(input:checked) { background: var(--tinta); color: var(--branco); }
-    /* banners de produto: a foto tem fundo branco, entao fica numa placa clara dentro da faixa escura */
-    .destaque:not(.destaque-escuro) { background: #18213F; }
-    .destaque:not(.destaque-escuro) .destaque-foto { margin: 1.6rem 4.6rem 2.8rem 0; padding: 1rem; border-radius: 18px; background: var(--cor); }
-    .ponto::before { background: rgba(255, 255, 255, .3); }
-    .ponto[aria-current="true"]::before { background: var(--tinta); }
-    /* fotos de produto: sempre no branco */
-    .categoria span:first-child, .produto-foto, .ficha-foto, .lista li img { background: #fff; }
-    .categoria-todos span:first-child { background: var(--azul-claro); }
-    /* presente certo: a faixa continua azul, so mais funda; o escolhido fica branco */
-    .presente { background: #17307F; }
-    .cartela { background: #0F1E4A; }
-    @media (hover: hover) and (pointer: fine) { .cartela:hover { background: #1A2C63; } }
-    .cartela:has(input:checked) { background: #fff; color: #1E44B8; }
-    .chegar-mapa { background: #fff; filter: invert(.9) hue-rotate(180deg); }
-    .ficha, .sacola { box-shadow: 0 0 0 1px var(--linha); }
-    .ficha::backdrop, .sacola::backdrop { background: rgba(0, 0, 0, .7); }
-    .previa { background: #005C4B; color: #E9EDEF; }
-    .sacola-pe .erro { color: #FF8A80; }
-    .status.pago { color: #5FD38D; }
-    .status.pago .pulso { background: #5FD38D; }
-    .aprovado circle { fill: #173D27; }
-    .aprovado path { stroke: #5FD38D; }
-  }
-  @media (prefers-color-scheme: dark) and (max-width: 760px) {
-    /* largura fixa: com aspect-ratio a margem lateral nao encolhe a placa */
-    .destaque:not(.destaque-escuro) .destaque-foto { justify-self: center; width: calc(100% - 7.2rem); margin: .9rem 0 0; padding: .6rem; }
-  }
 </style>
 <script>document.documentElement.classList.add("com-js");</script>
 </head>
