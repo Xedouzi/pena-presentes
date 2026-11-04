@@ -271,29 +271,31 @@
   .produto-preco { font-weight: 700; font-size: 1.15rem; }
   .produto-preco small { font-size: .8rem; font-weight: 500; color: var(--tinta-2); }
   .produto .btn { width: 100%; min-height: 46px; padding-inline: .8rem; margin-top: auto; }
-  /* etiqueta do fim da fileira: um cartao de presente com o furo da fita; o tamanho de um cartao ou o resto da linha */
+  /* cartao do fim da fileira: o tamanho de um cartao de produto ou o resto da linha */
   .fim { position: relative; display: grid; overflow: hidden; min-width: 0; border-radius: 22px; scroll-snap-align: start; }
   .fim-texto { display: flex; flex-direction: column; gap: .5rem; min-width: 0; padding: 1.2rem 1.15rem 1.25rem; font-size: .93rem; line-height: 1.45; }
   .fim-titulo { font-family: var(--fonte-titulo); font-size: 1.35rem; font-weight: 700; line-height: 1.08; overflow-wrap: normal; }
   .fim .btn { align-self: stretch; min-height: 46px; margin-top: auto; padding-inline: .8rem; overflow-wrap: normal; }
-  .fim-idade { background: var(--fundo-fim); color: var(--tinta); }
-  .fim-idade .fim-texto { padding-top: 3.2rem; }
-  .fim-idade .fim-texto > p:not(.fim-titulo):not(.fim-faixa) { color: var(--tinta-2); }
-  .fim-furo { position: absolute; top: 1.15rem; left: 1.15rem; width: 18px; height: 18px; border-radius: 50%; background: var(--branco); box-shadow: inset 0 0 0 3px var(--vermelho); }
-  .fim-furo::after { content: ""; position: absolute; left: 14px; top: 7px; width: 60px; height: 3px; border-radius: 2px; background: var(--vermelho); transform: rotate(-14deg); transform-origin: left center; }
-  .fim-faixa { color: var(--azul-2); font-weight: 600; }
+  /* faixa de idade: foto de familia que se dissolve no marinho, com a legenda em branco, como o banner da loja */
+  .fim-idade { isolation: isolate; background: var(--marinho); color: #D5DDF5; }
+  .fim-idade-foto { position: absolute; inset: 0 0 auto; z-index: -1; display: block; width: 100%; height: var(--alt, 66%); object-fit: cover; object-position: var(--pos); -webkit-mask-image: linear-gradient(180deg, #000 52%, transparent 94%); mask-image: linear-gradient(180deg, #000 52%, transparent 94%); }
+  .fim-idade .fim-texto { justify-content: flex-end; padding-top: 9.5rem; }
+  .fim-idade .fim-titulo, .fim-idade .fim-faixa { color: #fff; }
+  .fim-idade .btn { margin-top: .35rem; }
+  .fim-faixa { font-weight: 600; }
   .fim-faixa b { font-family: var(--fonte-titulo); font-size: 2.6rem; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
   .fim-loja { grid-template-rows: auto 1fr; background: var(--marinho); color: #D5DDF5; }
   .fim-loja .fim-titulo { color: #fff; }
   .fim-foto { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
   @media (min-width: 1101px) {
     .fileira .fim[data-falta] { grid-column: span 2; }
-    .fileira .fim-idade[data-falta] .fim-texto { justify-content: center; max-width: 24rem; padding-left: 1.6rem; }
-    .fileira .fim-idade[data-falta] .fim-faixa b { font-size: 3.4rem; }
+    #vitrine:not(.filtrada) .fim-idade[data-falta] .fim-idade-foto { inset: 0 0 0 auto; width: 62%; height: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 36%); mask-image: linear-gradient(90deg, transparent, #000 36%); }
+    #vitrine:not(.filtrada) .fim-idade[data-falta] .fim-texto { justify-content: center; width: 54%; padding: 1.2rem .25rem 1.25rem 1.6rem; }
+    #vitrine:not(.filtrada) .fim-idade[data-falta] .fim-faixa b { font-size: 3.4rem; }
     .fileira .fim[data-falta] .btn { align-self: start; margin-top: .5rem; padding-inline: 1.4rem; }
   }
   .filtrada .fim { grid-column: auto !important; }
-  @media (max-width: 560px) { .fim-titulo { font-size: 1.15rem; } .fim-texto { padding-inline: .9rem; } .fim-faixa b { font-size: 2.1rem; } }
+  @media (max-width: 560px) { .fim-titulo { font-size: 1.15rem; } .fim-texto { padding-inline: .9rem; } .fim-faixa b { font-size: 2.1rem; } .fim-idade .fim-texto > p:not(.fim-titulo):not(.fim-faixa) { display: none; } .fim-idade .btn { padding-inline: .25rem; } }
   .btn.adicionado { background: var(--marinho); color: #fff; }
   @media (max-width: 560px) { .produto-desc { display: none; } .produto-info { padding: .7rem .7rem .8rem; } .produto-nome { font-size: .95rem; } }
 
@@ -351,17 +353,17 @@
   .loja-texto > p { font-size: 1.1rem; color: var(--tinta-2); max-width: 36rem; }
   /* avaliacoes no Google: a nota no azul do letreiro, com a fita vermelha, e tres avaliacoes com nome e data */
   .google { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 1.1rem; margin-top: clamp(3rem, 6vw, 4.5rem); scroll-margin-top: 100px; }
-  .google-nota { display: grid; justify-items: start; align-content: start; gap: .5rem; padding: 1.7rem 1.6rem; border-radius: 22px; background: var(--azul) linear-gradient(180deg, transparent 1.2rem, var(--vermelho) 1.2rem, var(--vermelho) 1.75rem, transparent 1.75rem) no-repeat; color: #D7E0FA; padding-top: 2.6rem; }
+  .google-nota { display: grid; justify-items: start; align-content: start; gap: .3rem; padding: 2.05rem 1.5rem 1.25rem; border-radius: 22px; background: var(--azul) linear-gradient(180deg, transparent .85rem, var(--vermelho) .85rem, var(--vermelho) 1.3rem, transparent 1.3rem) no-repeat; color: #D7E0FA; }
   .google-marca { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; font-weight: 500; }
   .g-logo { width: 20px; height: 20px; flex: none; }
   .google-marca .g-logo { padding: 2px; border-radius: 50%; background: #fff; width: 24px; height: 24px; }
-  .google-numero { margin-top: .3rem; font-family: var(--fonte-titulo); font-size: 4.2rem; font-weight: 800; line-height: .9; color: #fff; font-variant-numeric: tabular-nums; }
+  .google-numero { margin-top: .15rem; font-family: var(--fonte-titulo); font-size: 3.3rem; font-weight: 800; line-height: .9; color: #fff; font-variant-numeric: tabular-nums; }
   .google-nota .estrelas { font-size: 1.25rem; color: #FFC93C; }
-  .google-nota .btn { margin-top: .6rem; min-height: 48px; }
+  .google-nota .btn { margin-top: .45rem; min-height: 46px; }
   .estrelas { display: inline-flex; gap: 1px; color: #E8A100; }
   .estrelas svg { width: 1.05em; height: 1.05em; fill: currentColor; }
   .depoimentos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
-  .depoimentos li { display: flex; flex-direction: column; gap: .75rem; min-width: 0; padding: 1.35rem 1.4rem 1.5rem; border-radius: 22px; background: var(--ceu); }
+  .depoimentos li { display: flex; flex-direction: column; justify-content: center; gap: .75rem; min-width: 0; padding: 1.1rem 1.4rem; border-radius: 22px; background: var(--ceu); }
   .dep-autor { display: grid; grid-template-columns: 40px minmax(0, 1fr) 18px; align-items: center; gap: .75rem; }
   .dep-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--av); color: #fff; font-size: 1.05rem; font-weight: 600; }
   .dep-autor p { min-width: 0; line-height: 1.3; }
@@ -1026,9 +1028,10 @@ const cartao = (p, nivel = 4) => {
   </li>`;
 };
 
-/* a fileira que nao enche a linha termina numa etiqueta de presente: a faixa de idade da secao
+/* a fileira que nao enche a linha termina num cartao com a faixa de idade da secao e uma foto de familia
+   (fotos do Pexels, licenca gratuita: 30701843 bebe, 4934747 ar livre, 31152783 bonecas, 4934751 carrinhos, 4241346 arte)
    leva ao "Presente certo" ja marcado; a papelaria leva ao WhatsApp, porque a loja tem muito mais */
-const FUNDO_FIM = ["#FFF3C4", "#FFE1E3", "#DDF3E4", "#E3EAFC"];
+const FOTO_FIM = { bonecas: ["bonecas", "50% 62%"], carrinhos: ["carrinhos", "58% 50%"], arte: ["arte", "22% 50%"], "ar-livre": ["ar-livre", "50% 30%"], bebe: ["bebe", "50% 30%", "--alt:76%"] };
 const TITULO_FIM = { bonecas: "Para brincar de faz de conta", carrinhos: "Para quem gosta de velocidade", arte: "Para criar, modelar e pintar", "ar-livre": "Para gastar energia ao ar livre", bebe: "Para os primeiros anos" };
 const fimFileira = (id, nome, lista) => {
   if (lista.length >= 5) return "";
@@ -1037,8 +1040,8 @@ const fimFileira = (id, nome, lista) => {
   const de = Math.min(...lista.map((p) => p.idade[0])), ate = Math.max(...lista.map((p) => p.idade[1]));
   const k = Math.max(0, IDADES.findIndex(([, a, b]) => de >= a && de <= b));
   const faixa = ate >= 99 ? `${de}+` : `${de} a ${ate}`;
-  const cor = FUNDO_FIM[CATEGORIAS.findIndex((c) => c[0] === id) % FUNDO_FIM.length];
-  return `<li class="fim fim-idade"${falta} style="--fundo-fim:${cor}"><span class="fim-furo" aria-hidden="true"></span><div class="fim-texto"><p class="fim-faixa"><b>${faixa}</b> anos</p><p class="fim-titulo">${TITULO_FIM[id] || "Presente certo para essa idade"}</p><p>Nesta seção, ${ate >= 99 ? `a partir de ${de} anos` : `de ${de} a ${ate} anos`}. Veja outras ideias para essa idade no Presente certo.</p><button class="btn" type="button" data-idade-ir="${k}">Ver ideias</button></div></li>`;
+  const [foto, pos, extra = ""] = FOTO_FIM[id] || ["bebe", "50% 30%"];
+  return `<li class="fim fim-idade"${falta} style="--pos:${pos};${extra}"><img class="fim-idade-foto" src="img/idade-${foto}.webp" alt="" loading="lazy"><div class="fim-texto"><p class="fim-faixa"><b>${faixa}</b> anos</p><p class="fim-titulo">${TITULO_FIM[id] || "Presente certo para essa idade"}</p><p>Nesta seção, ${ate >= 99 ? `a partir de ${de} anos` : `de ${de} a ${ate} anos`}. Veja outras ideias para essa idade no Presente certo.</p><button class="btn btn-branco" type="button" data-idade-ir="${k}">Ver ideias</button></div></li>`;
 };
 $("#vitrine").innerHTML = CATEGORIAS.map(([id, nome]) => {
   const lista = PRODUTOS.filter((p) => p.cat === id);
